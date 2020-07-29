@@ -7,10 +7,7 @@ const todoList = [];
 function addTodo() {
     const todoItem = document.createElement('li');
     const contentItem = document.createTextNode('da o bumbum');
-    todoItem.appendChild(contentItem); 
-
-    
-
+    todoItem.appendChild(contentItem);
 
     todoList.push(todoItem);
     console.log(todoList);
@@ -23,6 +20,5 @@ function renderTodos() {
         listElement.appendChild(item);
     };
 };
-
 
 addTodo();
