@@ -7,18 +7,25 @@ const todoList = [];
 function addTodo(e) {
     e.preventDefault();
     let inputValue = inputElement.value;
-    const todoItem = document.createElement('li');
-    const contentItem = document.createTextNode(inputValue);
-    todoItem.appendChild(contentItem);
 
-    todoList.push(todoItem);
-    inputElement.value = '';
-    console.log(todoList);
-    renderTodos();
+    if (inputValue) {
+        const a = createTodo(inputValue);
+
+        todoList.push(a);
+        inputElement.value = '';
+        renderTodos();
+    }
 };
 
+function createTodo(content) {
+    const todoItem = document.createElement('li');
+    const contentItem = document.createTextNode(content);
+    todoItem.appendChild(contentItem);
+
+    return todoItem;
+}
+
 function renderTodos() {
-    console.log('passei aqui');
     for (const item of todoList) {
         listElement.appendChild(item);
     };
