@@ -31,7 +31,7 @@ function createTodoComponent(content) {
     todoItem.appendChild(contentItem);
     todoItem.appendChild(excludeButton);
 
-    return todoItem
+    return todoItem;
 }
 
 function renderTodos() {
