@@ -1,15 +1,18 @@
 const listElement = document.querySelector('#app ul');
 const inputElement = document.querySelector('#app input');
-const buttonElement = document.querySelector('#app button');
+const formElement = document.querySelector('#app form');
 
 const todoList = [];
 
-function addTodo() {
+function addTodo(e) {
+    e.preventDefault();
+    let inputValue = inputElement.value;
     const todoItem = document.createElement('li');
-    const contentItem = document.createTextNode('da o bumbum');
+    const contentItem = document.createTextNode(inputValue);
     todoItem.appendChild(contentItem);
 
     todoList.push(todoItem);
+    inputElement.value = '';
     console.log(todoList);
     renderTodos();
 };
@@ -21,8 +24,4 @@ function renderTodos() {
     };
 };
 
-function removeTodo() {
-
-}
-
-addTodo();
+formElement.addEventListener('submit', (e) => addTodo(e));
