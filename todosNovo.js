@@ -15,24 +15,31 @@ function addTodo(e) {
     }
 };
 
+function createTodoComponent(content) {
+    const todoItem = document.createElement('li');
+    const contentItem = document.createTextNode(content);
+
+    const excludeButton = document.createElement('button');
+    const excludeButtonContent = document.createTextNode('x');
+
+    excludeButton.style.marginLeft = '10px';
+    excludeButton.appendChild(excludeButtonContent);
+
+    const itemToRemove = todoList.indexOf(content);
+    excludeButton.addEventListener('click', () => removeTodo(itemToRemove));
+
+    todoItem.appendChild(contentItem);
+    todoItem.appendChild(excludeButton);
+
+    return todoItem
+}
+
 function renderTodos() {
     listElement.innerHTML = '';
     for (const item of todoList) {
-        const todoItem = document.createElement('li');
-        const contentItem = document.createTextNode(item);
 
-        const excludeButton = document.createElement('button');
-        const excludeButtonContent = document.createTextNode('x');
-        const itemToRemove = todoList.indexOf(item);
-
-        excludeButton.addEventListener('click', () => removeTodo(itemToRemove));
-        excludeButton.style.marginLeft = '10px';
-        excludeButton.appendChild(excludeButtonContent);
-
-        todoItem.appendChild(contentItem);
-        todoItem.appendChild(excludeButton);
-
-        listElement.appendChild(todoItem);
+        const todoComponent = createTodoComponent(item);
+        listElement.appendChild(todoComponent);
     }
 }
 
