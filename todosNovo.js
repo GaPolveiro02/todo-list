@@ -9,38 +9,32 @@ function addTodo(e) {
     const inputValue = inputElement.value;
 
     if (inputValue) {
-        const a = createTodo(inputValue);
-
-        todoList.push(a);
+        todoList.push(inputValue);
         inputElement.value = '';
         renderTodos();
     }
 };
 
-function createTodo(content) {
-    const todoItem = document.createElement('li');
-    const contentItem = document.createTextNode(content);
-
-    const excludeButton = document.createElement('button');
-    const excludeButtonContent = document.createTextNode('x');
-
-    // excludeButton.setAttribute('onclick', `removeTodo${pos}`);
-
-    excludeButton.style.marginLeft = '10px';
-    excludeButton.appendChild(excludeButtonContent);
-
-    todoItem.appendChild(contentItem);
-    todoItem.appendChild(excludeButton);
-
-    return todoItem;
-}
-
 function renderTodos() {
+    listElement.innerHTML = '';
     for (const item of todoList) {
+        const todoItem = document.createElement('li');
+        const contentItem = document.createTextNode(item);
 
-        listElement.appendChild(item);
-    };
-};
+        const excludeButton = document.createElement('button');
+        const excludeButtonContent = document.createTextNode('x');
+        const itemToRemove = todoList.indexOf(item);
+
+        excludeButton.addEventListener('click', () => removeTodo(itemToRemove));
+        excludeButton.style.marginLeft = '10px';
+        excludeButton.appendChild(excludeButtonContent);
+
+        todoItem.appendChild(contentItem);
+        todoItem.appendChild(excludeButton);
+
+        listElement.appendChild(todoItem);
+    }
+}
 
 function removeTodo(item) {
     todoList.splice(item, 1);
